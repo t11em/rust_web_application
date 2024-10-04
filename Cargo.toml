@@ -1,0 +1,10 @@
+[package]
+name = "rust_web_application"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[[bin]]
+name = "app"
+path = "src/main.rs"
