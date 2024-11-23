@@ -4,8 +4,13 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+axum = { version = "0.7.9", features = ["macros"] }
 futures = "0.3.31"
+tokio = { version = "1.41.1", features = ["full"] }
 
 [[bin]]
 name = "app"
 path = "src/main.rs"
+
+[dev-dependencies]
+rstest = "0.23.0"

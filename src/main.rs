@@ -1,35 +1,16 @@
-use std::future::Future;
-use std::pin::Pin;
-use std::task::{Context, Poll};
-use futures::executor::block_on;
-use futures::future::FutureExt;
+use axum::{routing::get, Router};
+use std::net::{Ipv4Addr, SocketAddr};
+use tokio::net::TcpListener;
 
-struct Number {
-    value: i32,
+async fn hello_world() -> &'static str {
+    "Hello, World!"
 }
 
-impl Future for Number {
-    type Output = i32; // Return i32 type
-
-    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
-        std::task::Poll::Ready(self.value)
-    }
-}
-
-fn a1() -> impl Future<Output=i32> {
-    Number { value: 1 }
-}
-
-fn plus(a: i32, b: i32) -> impl Future<Output=i32> {
-    Number { value: a + b }
-}
-
-
-fn main() {
-    println!("Hello, world!");
-    println!("global: {}", std::env::var("GLOBAL").unwrap());
-    println!("global: {}", std::env::var("LOCAL").unwrap());
-
-    let ans = block_on(a1().then(|a| a1().then(move |b| plus(a, b))));
-    println!("ans: {}", ans);
+#[tokio::main]
+async fn main() {
+    let app = Router::new().route("/hello", get(hello_world));
+    let addr = SocketAddr::new(Ipv4Addr::LOCALHOST.into(), 8080);
+    let listener = TcpListener::bind(addr).await.unwrap();
+    println!("Listening on {}", addr);
+    axum::serve(listener, app).await.unwrap();
 }
