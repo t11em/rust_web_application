@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        - DATABASE_URL: ${DATABASE_URL}
+        DATABASE_URL: ${DATABASE_URL}
       network: host
     ports:
       - 8080:${PORT}
