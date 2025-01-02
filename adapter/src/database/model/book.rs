@@ -20,7 +20,7 @@ impl From<BookRow> for Book {
             description,
         } = value;
         Book {
-            id: book_id,
+            book_id,
             title,
             author,
             isbn,
