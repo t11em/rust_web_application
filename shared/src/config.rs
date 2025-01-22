@@ -4,6 +4,11 @@ pub struct AppConfig {
     pub database: DatabaseConfig,
 }
 
+pub struct RedisConfig {
+    pub host: String,
+    pub port: u16,
+}
+
 impl AppConfig {
     pub fn new() -> Result<Self> {
         let database = DatabaseConfig {
