@@ -25,5 +25,6 @@ impl ConnectionPool {
 }
 
 pub fn connect_database_with(cfg: &DatabaseConfig) -> ConnectionPool {
+    println!("{:?}", cfg);
     ConnectionPool(PgPool::connect_lazy_with(make_pg_options(cfg)))
 }
