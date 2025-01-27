@@ -50,8 +50,6 @@ async fn bootstrap() -> Result<()> {
     let registry = AppRegistry::new(pool, kv, app_config);
 
     let app = Router::new()
-        //.merge(v1::routes())
-        .merge(auth::routes())
         .merge(build_health_check_routers())
         .merge(build_book_routers())
         //.layer(cors())
