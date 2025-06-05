@@ -22,5 +22,5 @@ pub struct UpdateUserPassword {
 
 #[derive(Debug)]
 pub struct DeleteUser {
-    pub user_id: String,
+    pub user_id: UserId,
 }

@@ -42,7 +42,7 @@ impl UserRepository for UserRepositoryImpl {
             None => Ok(None),
         }
     }
-    async fn find_all(&self, event: CreateUser) -> AppResult<Vec<User>> {
+    async fn find_all(&self) -> AppResult<Vec<User>> {
         let users = sqlx::query_as!(
             UserRow,
             r#"
@@ -125,7 +125,7 @@ impl UserRepository for UserRepositoryImpl {
         tx.commit().await.map_err(AppError::TransactionError)?;
         Ok(())
     }
-    async fn update_rold(&self, event: UpdateUserRole) -> AppResult<()> {
+    async fn update_role(&self, event: UpdateUserRole) -> AppResult<()> {
         let res = sqlx::query!(
             r#"
             UPDATE users SET role_id = (
